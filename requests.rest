@@ -1,0 +1,21 @@
+GET http://localhost:3000/api
+
+###
+GET http://localhost:3000/api/user/78/Oleg
+
+###
+
+GET http://localhost:3000/api/test/109
+
+###
+GET http://localhost:3000/api/user/second?name=Oleg&age=20
+
+###
+POST http://localhost:3000/api/user
+Content-Type: application/json
+
+{
+    "name":"Bogdan",
+    "age":20
+}
+

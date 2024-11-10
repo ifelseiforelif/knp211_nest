@@ -6,10 +6,12 @@ import {
   HttpCode,
   HttpStatus,
   Param,
+  ParseIntPipe,
   Post,
   Query,
   Redirect,
 } from '@nestjs/common';
+import { UserService } from './user.service';
 
 class UserCreateDto {
   //Data Transfer Object
@@ -18,12 +20,14 @@ class UserCreateDto {
   readonly age: number;
 }
 
-//GET http://localhost:3000/api
+//GET http://localhost:3333/api
 @Controller('api')
-export class AppController {
+export class UserController {
+  constructor(private readonly userService: UserService) {}
+
   @Get()
-  getInfo(): { message: string } {
-    return { message: `Hello From Nest` };
+  getInfo(): string {
+    return this.userService.getInfo();
   }
 
   //GET http://localhost:3000/api/user/12/Alex
@@ -64,5 +68,10 @@ export class AppController {
   @Post('user')
   createUser(@Body() body: UserCreateDto): UserCreateDto {
     return { ...body, id: Date.now().toString() };
+  }
+
+  @Get('test/:id') //GET http://localhost:3333/api/test/one
+  getTest(@Param('id', ParseIntPipe) id: number): string {
+    return `Id: ${id}`;
   }
 }

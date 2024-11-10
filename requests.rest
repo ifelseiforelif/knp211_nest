@@ -1,17 +1,17 @@
-GET http://localhost:3000/api
+GET http://localhost:3333/api
 
 ###
-GET http://localhost:3000/api/user/78/Oleg
+GET http://localhost:3333/api/user/78/Oleg
 
 ###
 
-GET http://localhost:3000/api/test/109
+GET http://localhost:3333/api/test/109
 
 ###
-GET http://localhost:3000/api/user/second?name=Oleg&age=20
+GET http://localhost:3333/api/user/second?name=Oleg&age=20
 
 ###
-POST http://localhost:3000/api/user
+POST http://localhost:3333/api/user
 Content-Type: application/json
 
 {
@@ -19,3 +19,6 @@ Content-Type: application/json
     "age":20
 }
 
+
+###
+GET http://localhost:3333/api/test/ten

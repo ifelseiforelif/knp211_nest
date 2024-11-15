@@ -10,15 +10,12 @@ import {
   Post,
   Query,
   Redirect,
+  UsePipes,
+  ValidationPipe,
 } from '@nestjs/common';
 import { UserService } from './user.service';
-
-class UserCreateDto {
-  //Data Transfer Object
-  readonly id?: string;
-  readonly name: string;
-  readonly age: number;
-}
+import { UpperPipe } from 'src/pipes/upper.pipe';
+import { CreateUserDto } from './dto/create-user.dto';
 
 //GET http://localhost:3333/api
 @Controller('api')
@@ -64,14 +61,18 @@ export class UserController {
     };
   }
   //POST http://localhost:3000/api/user
-  @HttpCode(HttpStatus.PARTIAL_CONTENT)
+  //@HttpCode(HttpStatus.PARTIAL_CONTENT)
+  //@UsePipes(new ValidationPipe())
   @Post('user')
-  createUser(@Body() body: UserCreateDto): UserCreateDto {
-    return { ...body, id: Date.now().toString() };
+  createUser(@Body() body: CreateUserDto): CreateUserDto {
+    return { ...body, id: Date.now() };
   }
 
-  @Get('test/:id') //GET http://localhost:3333/api/test/one
-  getTest(@Param('id', ParseIntPipe) id: number): string {
-    return `Id: ${id}`;
+  @Get('test/:id') //GET http://localhost:3333/api/test/one?title=ten
+  getTest(
+    @Param('id', ParseIntPipe) id: number,
+    @Query('title', UpperPipe) title: string,
+  ): string {
+    return `Id: ${id} Title: ${title}`;
   }
 }

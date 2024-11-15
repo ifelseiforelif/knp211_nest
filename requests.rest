@@ -15,10 +15,15 @@ POST http://localhost:3333/api/user
 Content-Type: application/json
 
 {
-    "name":"Bogdan",
-    "age":20
+    "name":"Alex",
+    "email":"alex@gmail.com",
+    "age":20,
+    "address":{
+        "street":"ya444",
+        "house":10
+    }
 }
 
 
 ###
-GET http://localhost:3333/api/test/ten
+GET http://localhost:3333/api/test/10?title=mytestdata
